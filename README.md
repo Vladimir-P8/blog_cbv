@@ -45,7 +45,7 @@ python manage.py createsuperuser
 ```bash
 python manage.py runserver
 ```
-Теперь проект доступен в браузере по адресу: https:gadzin.ru
+Теперь проект доступен в браузере по адресу: [https:gadzin.ru](https://gadzin.ru/)
 
 ## 📂 Структура проекта
 * `core/` — основные настройки Django-проекта.
