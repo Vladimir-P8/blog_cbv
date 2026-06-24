@@ -1,0 +1,119 @@
+{% load mptt_tags %}
+{% load blog_tags %}
+
+<!-- Категории -->
+
+<div class="card mb-4">
+    <div class="card-header">
+         <h5>Категории</h5>
+    </div>
+
+    <div class="card-body ">
+        {% full_tree_for_model blog.Category as categories %}
+        <ul>
+            {% recursetree categories %}
+                <li>
+                    <a class="list-group-item list-group-item-action" href="{{ node.get_absolute_url }}">{{ node.title }}</a>
+
+
+                {% if not node.is_leaf_node %}
+                    <ul>
+                        {{ children }}
+                    </ul>
+                {% endif %}
+
+                </li>
+            {% endrecursetree %}
+        </ul>
+    </div>
+</div>
+
+<!-- Информация -->
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Это мой блог</h5>
+    </div>
+    <div class="card-body ">
+        <p>Здесь размещено уже {% total_posts %} публикаций</p>
+    </div>
+</div>
+
+<!-- Поиск -->
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Поиск</h5>
+    </div>
+
+    <div class="card-body">
+        <div class="input-group">
+            <form action="/search/" method="get" class="input-group">
+                <input type="text" name="query" class="form-control" placeholder="Введите слова для поиска..."
+                       required="" id="id_query">
+                <button class="btn btn-primary" id="button-search" type="submit">Ищем!</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--<button class="btn btn-primary" - синий фон кнопки-->
+<!--<button class="btn btn-secondary" - серый фон кнопки-->
+
+
+<!-- Последние публикации -->
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Последние публикации</h5>
+    </div>
+
+    <div class="list-group">
+        <div class="card-body">
+            {% show_latest_posts 3 %}
+        </div>
+    </div>
+</div>
+
+<!-- Комментируемые публикации -->
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Наиболее комментируемые публикации</h5>
+    </div>
+
+    <div class="list-group">
+        <div class="card-body">
+            {% get_most_commented_posts as most_commented_posts %}
+                {% for post in most_commented_posts %}
+                    <a class="list-group-item list-group-item-action" href="{{ post.get_absolute_url }}">
+                        {{ post.title|safe }}
+                    </a>
+                {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Публикации с высоким рейтингом -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Публикации с высоким рейтингом</h5>
+    </div>
+
+    <div class="list-group">
+        <div class="card-body">
+            {% get_high_rating_posts as high_rating_posts %}
+                {% for post in high_rating_posts %}
+                    <a class="list-group-item list-group-item-action" href="{{ post.get_absolute_url }}">
+                        {{ post.title|safe }}
+                    </a>
+                {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!--<a class="list-group-item list-group-item-action" не закрашенный элемент списка-->
+<!--<a class="list-group-item list-group-item-action active" закрашенный элемент списка-->
+
+
+<a href="{% url 'latest_post_feed' %}">Подписаться на RSS ленту</a>
+

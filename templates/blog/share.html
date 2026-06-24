@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block title %}Отправить публикацию{% endblock %}
+
+{% block content %}
+    {% if sent %}
+<div class="card mb-3 border-0">
+        <h5>E-mail успешно отправлен</h5>
+        <p>
+            "{{ post.title }}" успешно отправлено
+            to {{ form.cleaned_data.to }}.
+        </p>
+</div>
+    {% else %}
+<div class="card mb-3 border-0">
+        <h5>Отправить публикацию "{{ post.title | safe }}" по электронной почте</h5>
+        <form method="post" enctype="multipart/form-data">
+            {{ form.as_p }}
+            {% csrf_token %}
+
+            <div class="d-grid gap-2 d-md-block mt-2">
+                    <button type="submit" class="btn btn-dark">Отправить E-Mail</button>
+            </div>
+
+<!--            <input type="submit" value="Отправить e-mail">-->
+        </form>
+</div>
+    {% endif %}
+    <p><a href="{{ post.get_absolute_url }}">Назад к публикации</a></p>
+{% endblock %}

@@ -1,0 +1,186 @@
+/* ==========================================================================
+   1. СБРОС БАЗОВЫХ ОТСТУПОВ И ОБЩИЕ НАСТРОЙКИ СТРАНИЦЫ
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #2D3748; /* Мягкий черный цвет, снижает нагрузку на глаза */
+    background-color: #F7FAFC; /* Легкий светлый фон страницы */
+    padding: 40px 20px;
+}
+
+/* Контейнер для центрирования текста на больших экранах (для страниц соглашений) */
+.legal-container {
+    max-width: 640px; /* Сужено для оптимальной длины строки чтения */
+    margin: 40px auto;
+    background-color: #FFFFFF;
+    padding: 50px 45px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Мягкая эстетичная тень */
+}
+
+/* ==========================================================================
+   2. ОФОРМЛЕНИЕ ТЕКСТА, СПИСКОВ И ЗАГОЛОВКОВ ВНУТРИ ДОКУМЕНТОВ
+   ========================================================================== */
+p {
+    margin-bottom: 14px;
+    text-align: left; /* Естественное выравнивание без огромных пробелов */
+    font-size: 15px;
+    color: #4A5568;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1A202C;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2D3748;
+    margin-top: 30px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #E2E8F0; /* Тонкая разделительная линия */
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #718096; /* Серый цвет для подзаголовка */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+strong {
+    color: #1A202C;
+}
+
+ul {
+    margin-bottom: 16px;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 6px;
+    font-size: 15px;
+    color: #4A5568;
+}
+
+.date {
+    font-size: 14px;
+    color: #718096;
+    text-align: right;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+mark {
+    background-color: #FEFCBF; /* Нежно-желтый маркер */
+    color: #744210;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* Стили для стандартных ссылок */
+a {
+    color: #3182CE;
+    text-decoration: none;
+    border-bottom: 1px dashed #3182CE;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: #2B6CB0;
+    border-bottom-style: solid;
+}
+
+/* ==========================================================================
+   3. УКРОЩЕНИЕ ЧЕК-БОКСА BOOTSTRAP НА СТРАНИЦЕ РЕГИСТРАЦИИ ({{ form.as_p }})
+   ========================================================================== */
+
+/* Стилизация чекбокса с правильным классом form-check-input */
+html body form p input#id_agreement.form-check-input[type="checkbox"] {
+    width: 16px !important;
+    min-width: 16px !important;
+    max-width: 16px !important;
+    height: 16px !important;
+    min-height: 16px !important;
+    max-height: 16px !important;
+
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+    position: static !important;
+
+    margin: 5px 12px 0 0 !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+}
+
+/* Настройка параграфа-обертки во флекс-строку */
+html body form p:has(input#id_agreement) {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    margin-top: 25px !important;
+    margin-bottom: 25px !important;
+}
+
+/* Скрытие пустого label */
+html body form p:has(input#id_agreement) label {
+    display: none !important;
+}
+
+/* Оформление текста подсказки со ссылками */
+html body #id_agreement_helptext,
+html body form p:has(input#id_agreement) .helptext {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: #4A5568 !important;
+    display: inline-block !important;
+    text-align: left !important;
+    margin: 0 !important;
+}
+
+html body #id_agreement_helptext a,
+html body form p:has(input#id_agreement) .helptext a {
+    color: #3182CE !important;
+    text-decoration: underline !important;
+    border-bottom: none !important;
+}
+
+/* ==========================================================================
+   4. АДАПТИВНОСТЬ ПОД МОБИЛЬНЫЕ УСТРОЙСТВА
+   ========================================================================== */
+@media (max-width: 600px) {
+    body {
+        padding: 15px 10px;
+    }
+    .legal-container {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 22px;
+    }
+    h2 {
+        font-size: 18px;
+    }
+    /* На мобильных увеличиваем кликабельную зону чекбокса */
+    html body form p input#id_agreement.form-check-input[type="checkbox"] {
+        width: 18px !important;
+        height: 18px !important;
+        margin-top: 3px !important;
+    }
+}

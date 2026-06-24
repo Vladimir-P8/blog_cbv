@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div class="card mb-3 border-0 nth-shadow">
+        <div class="card-body">
+            <div class="card-title nth-card-title">
+                <h4>Авторизация на сайте</h4>
+            </div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Мой Блог 2.0</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center gap-2">
+                <!-- Кнопка «Вход через GitHub»-->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'social:begin' 'github' %}" title="Вход через GitHub">
+                        Вход через GitHub
+                    </a>
+                </li>
+                <!-- Кнопка «Вход через Google»-->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}" title="Вход через Google">
+                        Вход через Google
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-grid gap-2 d-md-block mt-2">
+                <button type="submit" class="btn btn-dark">Авторизоваться</button>
+             </div>
+            </form>
+        </div>
+    </div>
+ <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+{% endblock %}

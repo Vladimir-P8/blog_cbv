@@ -1,0 +1,65 @@
+{% load static %}
+{% load blog_tags %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+<!-- тег |safe не работает внутри title>-->
+<!--От тегов избавляемся во views.py:-->
+<!--class PostDetailView(DetailView):-->
+<!--...-->
+<!--    def get_context_data(self, **kwargs):-->
+<!--        context = super().get_context_data(**kwargs)-->
+<!--        context['title'] = self.object.title.replace('<p>', '').replace('</p>', '')-->
+<!--        context['form'] = CommentCreateForm  # new-->
+<!--        return context-->
+<!--...-->
+<!-- тег |safe всё же работает внутри title, но он удаляет символы типа &sect; >-->
+    <title>{{ title|safe }}</title>
+
+
+<!--Ссылаемся на файлы, используя CDN Bootstrap. -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<!--Грузим иконку сайта-->
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+<!--    Подключаем иконки-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+{% include 'header.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 p-4">
+        {% include 'includes/messages.html' %}
+            {% block content %}
+            {% endblock %}
+
+            {% include 'pagination.html' %}
+
+        </div>
+
+        <div class="col-4 p-4">
+
+            {% include 'sidebar.html' %}
+
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}
+
+<script src="{% static 'backend.js' %}"></script>
+{% block script %}{% endblock %}
+
+<!--<script>hljs.highlightAll();</script> &lt;!&ndash; New code &ndash;&gt;-->
+
+</body>
+
+</html>
