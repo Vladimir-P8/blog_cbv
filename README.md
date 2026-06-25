@@ -13,7 +13,7 @@
 
 ### 1. Клонирование репозитория
 ```bash
-git clone git@github.com:git@github.com:Vladimir-P8/blog_cbv.git
+git clone git@github.com:Vladimir-P8/blog_cbv.git
 cd blog_cbv
 ```
 
